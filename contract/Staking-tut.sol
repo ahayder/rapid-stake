@@ -46,8 +46,8 @@ contract RapidStake {
     // in constructor pass in the address for rusd token and your custom bank token
     // that will be used to pay interest
     constructor() public {
-        rusd = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
-        rapidToken = 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48;
+        rusd = 0x54AE4ce7806d031B0efa32D6f3570A6B2E1cCa19;
+        rapidToken = 0x5E0bE16D0604c8011B1950698fb09a402bc8A853;
     }
 
     // allow user to stake rusd tokens in contract
