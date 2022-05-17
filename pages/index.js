@@ -6,7 +6,7 @@ import Footer from "../components/Footer";
 import RapidStake from "../contract/abis/rapidStake.json";
 import RapidToken from "../contract/abis/rapidToken.json";
 import Rusd from "../contract/abis/rusd.json";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 import Web3 from "web3";
 
 const rapidStakeAddr = "0x664Ea31420bbf0dC33716Ce0b5E52b9939e69BD2";
@@ -37,15 +37,12 @@ export default function Home() {
         setAddress(accounts[0]);
 
         const rapidStakeContract = new web3.eth.Contract(RapidStake.abi, rapidStakeAddr);
-        const rapidStakeContractAbi = rapidStakeContract.abi;
         setRapidStakeContractData(rapidStakeContract);
 
         const rapidTokenContract = new web3.eth.Contract(RapidToken.abi, rapidTokenAddr);
-        const rapidTokenContractAbi = rapidTokenContract.abi;
         setRapidTokenContractData(rapidTokenContract);
 
         const rusdContract = new web3.eth.Contract(Rusd.abi, rusdAddr);
-        const rusdContractAbi = ruselessContract.abi;
         setRusdContractData(rusdContract);
 
         window.ethereum.on("accountsChanged", async () => {
@@ -68,18 +65,32 @@ export default function Home() {
     } else {
       /* MetaMask is not installed */
       Swal.fire({
-        icon: 'error',
-        title: 'No Wallet!',
+        icon: "error",
+        title: "No Wallet!",
         text: `Metamask not installed.`,
-      })
+      });
     }
   };
+
+  // get approval for rusd contract
+  const getApproval = async () => {
+    try {
+      const approval = await rapidTokenContractData.methods.approve(rapidStakeAddr, "1000000000000000000000000").send({ from: address });
+      console.log(approval);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  const handleStake = async (amount) => {
+    await rapidStakeContractData.methods.stakeTokens(amount).send({from: address});
+  }
 
   return (
     <>
       <Flex height="100vh" direction="column" justifyContent="space-between" alignItems="center">
         <NavBar address={address} connectWalletHandler={connectWalletHandler} />
-        <MainCointainer />
+        <MainCointainer getApproval={getApproval} handleStake={handleStake} />
         <Footer />
       </Flex>
     </>
