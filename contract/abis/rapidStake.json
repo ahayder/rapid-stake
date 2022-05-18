@@ -7,6 +7,19 @@
       "type": "constructor"
     },
     {
+      "inputs": [],
+      "name": "getTotalStakers",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "address",
@@ -66,7 +79,7 @@
     },
     {
       "inputs": [],
-      "name": "rapidToken",
+      "name": "rapidRewardToken",
       "outputs": [
         {
           "internalType": "address",
@@ -79,7 +92,7 @@
     },
     {
       "inputs": [],
-      "name": "rusd",
+      "name": "rapidToken",
       "outputs": [
         {
           "internalType": "address",
@@ -131,6 +144,32 @@
         }
       ],
       "name": "stakingBalance",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalStakedAmount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "totalWithdrawn",
       "outputs": [
         {
           "internalType": "uint256",

@@ -1,5 +1,5 @@
 {
-  "contractName": "RapidToken",
+  "contractName": "UsdtToken",
   "abi": [
     {
       "inputs": [

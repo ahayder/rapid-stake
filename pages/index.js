@@ -5,20 +5,20 @@ import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 import RapidStake from "../contract/abis/rapidStake.json";
 import RapidToken from "../contract/abis/rapidToken.json";
-import Rusd from "../contract/abis/rusd.json";
+import RapidRewardToken from "../contract/abis/rapidRewardToken.json";
 import Swal from "sweetalert2";
 import Web3 from "web3";
 
-const rapidStakeAddr = "0x664Ea31420bbf0dC33716Ce0b5E52b9939e69BD2";
-const rapidTokenAddr = "0x5E0bE16D0604c8011B1950698fb09a402bc8A853";
-const rusdAddr = "0x54AE4ce7806d031B0efa32D6f3570A6B2E1cCa19";
+const rapidStakeAddr = "0x7aaf44E8aD179E99B8cc17DDC61Ea424ee55ef70";
+const rapidTokenAddr = "0x2B9C86c6AAc6b13DB640a3f3e30CDBAd7f19317D";
+const rapidRewardTokenAddr = "0x061ac65d2B2e15388901c1BDCf3FdaB575665D7F";
 
 export default function Home() {
   const [address, setAddress] = useState(null);
   const [web3, setWeb3] = useState(null);
   const [rapidStakeContractData, setRapidStakeContractData] = useState(null);
   const [rapidTokenContractData, setRapidTokenContractData] = useState(null);
-  const [rusdContractData, setRusdContractData] = useState(null);
+  const [rapidRewardTokenData, setRapidRewardTokenData] = useState(null);
   const [error, setError] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -42,8 +42,8 @@ export default function Home() {
         const rapidTokenContract = new web3.eth.Contract(RapidToken.abi, rapidTokenAddr);
         setRapidTokenContractData(rapidTokenContract);
 
-        const rusdContract = new web3.eth.Contract(Rusd.abi, rusdAddr);
-        setRusdContractData(rusdContract);
+        const rapidRewardToken = new web3.eth.Contract(RapidRewardToken.abi, rapidRewardTokenAddr);
+        setRapidRewardTokenData(rapidRewardToken);
 
         window.ethereum.on("accountsChanged", async () => {
           const accounts = await web3.eth.getAccounts();
@@ -74,8 +74,9 @@ export default function Home() {
 
   // get approval for rusd contract
   const getApproval = async () => {
+    console.log("hola")
     try {
-      const approval = await rapidTokenContractData.methods.approve(rapidStakeAddr, "1000000000000000000000000").send({ from: address });
+      const approval = await rapidRewardTokenData.methods.approve(rapidStakeAddr, "1000000000000000000000000").send({ from: address });
       console.log(approval);
     } catch (err) {
       console.log(err);
@@ -83,7 +84,8 @@ export default function Home() {
   }
 
   const handleStake = async (amount) => {
-    await rapidStakeContractData.methods.stakeTokens(amount).send({from: address});
+    const stake = await rapidStakeContractData.methods.stakeTokens(amount).send({from: address});
+    console.log(stake);
   }
 
   return (
