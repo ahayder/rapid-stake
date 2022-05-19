@@ -1,17 +1,18 @@
-import { Flex, useColorModeValue, Tabs, TabList, TabPanels, Tab, TabPanel, Button } from "@chakra-ui/react";
+import { Flex, useColorModeValue, Tabs, TabList, TabPanels, Tab, TabPanel, Button, Heading } from "@chakra-ui/react";
 import ClaimBtcTab from "./Tabs/ClaimBtcTab";
 import UnStake from "./Tabs/UnStake";
 import Stake from "./Tabs/Stake";
 import Stats from "./Stats";
 
-const MainCointainer = ({ getApproval, handleStake }) => {
+const MainCointainer = ({ unStake, getMyStakedRPT, stats, getApproval, handleStake }) => {
   return (
     <Flex direction={"column"} px={4} alignItems={"center"} justifyContent={"space-between"} width={["100%", "80%", "55%", "50%", "40%"]}>
+      <Heading mb="5">Stake Your RPT Token</Heading>
       <Flex direction={"column"} width={"100%"}>
         <Button onClick={getApproval} mb={"3"} size={"lg"} bg={useColorModeValue("gray.900", "gray.400")} color={useColorModeValue("white", "gray.900")}>
-          Approve your RUSD for Rapid Stake
+          Approve your RPT Token to Rapid Stake
         </Button>
-        <Stats />
+        <Stats stats={stats} />
       </Flex>
       <Tabs variant="unstyled" width={"100%"} align="center" size="lg">
         <TabList bg={useColorModeValue("gray.100", "gray.400")} borderRadius={"md"}>
@@ -35,7 +36,7 @@ const MainCointainer = ({ getApproval, handleStake }) => {
             <Stake handleStake={handleStake} />
           </TabPanel>
           <TabPanel px={"0"}>
-            <UnStake />
+            <UnStake unStake={unStake} getMyStakedRPT={getMyStakedRPT} />
           </TabPanel>
           <TabPanel px={"0"}>
             <ClaimBtcTab />

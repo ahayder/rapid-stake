@@ -1,15 +1,19 @@
 import { Flex, Stat, StatLabel, StatNumber, StatHelpText, StatArrow, StatGroup, Spacer } from "@chakra-ui/react";
 
-const Stats = () => {
+const Stats = ({ stats }) => {
   return (
     <Flex justifyContent={"space-between"} width="100%" mb={"10"}>
       <Stat>
-        <StatLabel>Total Staked</StatLabel>
-        <StatNumber>345,670</StatNumber>
+        <StatLabel>Stakers</StatLabel>
+        <StatNumber>{stats.totalStakers || 0}</StatNumber>
       </Stat>
       <Stat>
-        <StatLabel>Total Rewards Distributed</StatLabel>
-        <StatNumber>45</StatNumber>
+        <StatLabel>Total Staked</StatLabel>
+        <StatNumber>{stats.totalStakedAmount || 0}</StatNumber>
+      </Stat>
+      <Stat>
+        <StatLabel>Total Withdrawn</StatLabel>
+        <StatNumber>{stats.totalWithdrawnAmount || 0}</StatNumber>
       </Stat>
     </Flex>
   );

@@ -47,7 +47,7 @@ contract RapidStake {
 
     // in constructor pass in the address for rapidRewardToken token and your custom bank token
     // that will be used to pay interest
-    constructor() public {
+    constructor() {
         rapidRewardToken = 0x061ac65d2B2e15388901c1BDCf3FdaB575665D7F;
         rapidToken = 0x2B9C86c6AAc6b13DB640a3f3e30CDBAd7f19317D;
     }
@@ -83,7 +83,7 @@ contract RapidStake {
         require(balance > 0, "staking balance can not be 0");
 
         // transfer rapidRewardToken tokens out of this contract to the msg.sender
-        IERC20(rapidRewardToken).transfer(msg.sender, balance);
+        IERC20(rapidToken).transfer(msg.sender, balance);
 
         // reset staking balance map to 0
         stakingBalance[msg.sender] = 0;
