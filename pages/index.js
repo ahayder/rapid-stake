@@ -65,6 +65,14 @@ export default function Home() {
     }
   };
 
+  const convertToWei = (amount) => {
+    return web3.utils.toWei(String(amount),'ether');
+  }
+
+  const convertToEther = (amount) => {
+    return web3.utils.fromWei(String(amount),'ether');
+  }
+
   const getStats = async () => {
     try {
       setIsLoading(true);
@@ -73,8 +81,8 @@ export default function Home() {
       const totalWithdrawnAmount = await rapidStakeContractData.methods.totalWithdrawn().call();
       setStats({
         totalStakers: totalStakers,
-        totalStakedAmount: totalStakedAmount,
-        totalWithdrawnAmount: totalWithdrawnAmount,
+        totalStakedAmount: convertToEther(totalStakedAmount),
+        totalWithdrawnAmount: convertToEther(totalWithdrawnAmount),
       });
       setIsLoading(false);
       return stats;
@@ -96,14 +104,14 @@ export default function Home() {
   };
 
   const handleStake = async (amount) => {
-    const stake = await rapidStakeContractData.methods.stakeTokens(amount).send({ from: address });
+    const stake = await rapidStakeContractData.methods.stakeTokens(convertToWei(amount)).send({ from: address });
     console.log(stake);
   };
 
   const getMyStakedRPT = async () => {
     const myStakedRPT = await rapidStakeContractData.methods.stakingBalance(address).call();
     console.log(typeof(myStakedRPT));
-    return myStakedRPT;
+    return convertToEther(myStakedRPT);
   };
 
   const unStake = async () => {

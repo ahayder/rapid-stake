@@ -9,11 +9,11 @@ const Stats = ({ stats }) => {
       </Stat>
       <Stat>
         <StatLabel>Total Staked</StatLabel>
-        <StatNumber>{stats.totalStakedAmount || 0}</StatNumber>
+        <StatNumber>{stats.totalStakedAmount && Number(stats.totalStakedAmount).toFixed(4) || 0}</StatNumber>
       </Stat>
       <Stat>
         <StatLabel>Total Withdrawn</StatLabel>
-        <StatNumber>{stats.totalWithdrawnAmount || 0}</StatNumber>
+        <StatNumber>{stats.totalWithdrawnAmount && Number(stats.totalWithdrawnAmount).toFixed(4) || 0}</StatNumber>
       </Stat>
     </Flex>
   );

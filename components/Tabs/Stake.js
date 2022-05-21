@@ -10,7 +10,7 @@ const Stake = ({ handleStake }) => {
         <Text fontSize={"xl"} fontWeight="bold">
           Stake RUSD
         </Text>
-        <NumberInput defaultValue={20} onChange={(valueString) => setStakeAmount(parseInt(valueString))}>
+        <NumberInput defaultValue={0} onChange={(valueString) => setStakeAmount(parseInt(valueString))}>
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />
